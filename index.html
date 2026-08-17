@@ -195,6 +195,45 @@
   .modal-body{padding:22px 28px 28px}
   .m-sec{margin-bottom:20px}
   .m-sec-label{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand);font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+  /* Monday Memo — signal cards (visual pass 2026-08-17) */
+  .sig{display:flex;gap:13px;align-items:flex-start;background:var(--paper);border:1px solid var(--border);
+       border-left:4px solid var(--sig,var(--brand));border-radius:13px;padding:13px 15px;margin-bottom:10px;
+       opacity:0;transform:translateY(10px);animation:sigIn .5s cubic-bezier(.2,.7,.3,1) forwards;
+       transition:box-shadow .2s ease,transform .2s ease}
+  .sig:not([style*='block']):hover{box-shadow:0 6px 18px rgba(37,41,31,.09);transform:translateY(-2px)}
+  @keyframes sigIn{to{opacity:1;transform:none}}
+  .sig-badge{width:42px;height:42px;min-width:42px;border-radius:12px;display:flex;align-items:center;
+             justify-content:center;font-size:21px;background:var(--sigbg,var(--brand-light))}
+  .sig-top{display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap}
+  .sig-kind{font-family:'JetBrains Mono';font-size:8.5px;letter-spacing:.11em;font-weight:800;
+            color:var(--sig,var(--brand));background:var(--sigbg,var(--brand-light));padding:3px 7px;border-radius:20px}
+  .sig-live{font-family:'JetBrains Mono';font-size:8.5px;letter-spacing:.08em;font-weight:800;color:var(--coral)}
+  .sig-live i{font-style:normal;animation:sigPulse 1.6s ease-in-out infinite;display:inline-block}
+  @keyframes sigPulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .sig-stat{margin-left:auto;text-align:right;line-height:1}
+  .sig-stat b{display:block;font-family:'Quicksand';font-weight:900;font-size:22px;color:var(--sig,var(--brand));letter-spacing:-.01em}
+  .sig-stat span{display:block;font-family:'JetBrains Mono';font-size:8px;letter-spacing:.06em;color:var(--ink-soft);margin-top:3px}
+  .sig-h{font-weight:800;font-size:13.5px;line-height:1.32;margin-bottom:3px}
+  .sig-d{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+  @media (prefers-reduced-motion:reduce){
+    .sig{opacity:1;transform:none;animation:none}
+    .sig:hover{transform:none}
+    .sig-live i{animation:none}
+  }
+  .mv{background:var(--paper);border:1px solid var(--border);border-radius:13px;padding:13px 15px;margin-bottom:9px;
+      display:flex;gap:12px;align-items:flex-start;position:relative;overflow:hidden;
+      opacity:0;transform:translateY(10px);animation:sigIn .5s cubic-bezier(.2,.7,.3,1) forwards;
+      transition:box-shadow .2s ease,transform .2s ease,border-color .2s ease}
+  .mv:hover{box-shadow:0 6px 18px rgba(37,41,31,.09);transform:translateY(-2px);border-color:var(--brand)}
+  .mv-n{width:30px;height:30px;min-width:30px;border-radius:9px;background:var(--brand);color:#fff;
+        display:flex;align-items:center;justify-content:center;font-family:'Quicksand';font-weight:900;font-size:14px}
+  .mv-h{font-weight:800;font-size:13.5px;line-height:1.32;margin-bottom:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .mv-d{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+  .mv-tag{font-family:'JetBrains Mono';font-size:8px;letter-spacing:.1em;font-weight:800;color:var(--orange);
+          background:#FBEDDF;padding:3px 7px;border-radius:20px;white-space:nowrap}
+  .mv-arrow{margin-left:auto;color:var(--brand);font-size:15px;opacity:.35;transition:transform .2s ease,opacity .2s ease}
+  .mv:hover .mv-arrow{transform:translateX(4px);opacity:1}
+  @media (prefers-reduced-motion:reduce){ .mv{opacity:1;transform:none;animation:none} .mv:hover{transform:none} .mv:hover .mv-arrow{transform:none} }
   .hookrow{background:var(--paper);border:1px solid var(--border);border-radius:12px;padding:11px 13px;margin-bottom:8px;font-size:13.5px;line-height:1.4;position:relative}
   .hookrow.rec{border-color:var(--green);background:#F3FAF0}
   .rec-tag{font-size:8.5px;font-weight:800;color:var(--green);font-family:'JetBrains Mono';letter-spacing:.08em;position:absolute;top:8px;right:11px}
@@ -465,14 +504,23 @@ const CAST = [
 ];
 
 const WELCOME_HIGHLIGHTS = [
-  {t:"The FDA moved on the rule that let companies vouch for their own food-contact materials", d:"Announced Aug 10 and in the Federal Register Aug 11: manufacturers would have to NOTIFY the FDA whenever they decide a substance is safe — and it explicitly covers food-contact substances, meaning the things that touch your food. Right now that decision can be made in-house and never reported. Precision matters here: it is a proposal, not law; it requires notification, not approval; comments close Dec 9 and it will not be final before 2027."},
-  {t:"California killed the ‘sell by’ date — and the confusion it caused", d:"From Jul 1, 2026 California requires ‘BEST if used by’ for quality and ‘USE by’ for safety, and bans consumer-facing ‘sell by’ entirely. It is the first statewide mandate. The reason it exists: 88% of Americans throw food out at or near the label date, only 53% can correctly say what the labels mean, and roughly a tenth of all US food waste traces back to that confusion."},
-  {t:"Fresh produce is 45.4% of everything America throws away", d:"ReFED’s 2026 report logged the first national drop in surplus food since the pandemic — 70 million tons, down 2.2%, led by households. But the composition is the useful part for a wrap brand: fresh produce is the single most wasted category, and the reasons are boring and fixable. This is the clearest ‘what is this product actually FOR’ number the engine has surfaced."},
+  {glyph:"🧾", kind:"POLICY", live:true, color:"var(--brand)", bg:"var(--brand-light)", stat:"Dec 9", statLabel:"comments close",
+   t:"The FDA moved on the rule that let companies vouch for their own food-contact materials",
+   d:"Announced Aug 10 and in the Federal Register Aug 11: manufacturers would have to NOTIFY the FDA whenever they decide a substance is safe — and it explicitly covers food-contact substances, meaning the things that touch your food. Right now that decision can be made in-house and never reported. Precision matters here: it is a proposal, not law; it requires notification, not approval; comments close Dec 9 and it will not be final before 2027."},
+  {glyph:"🏷️", kind:"LABELS", live:false, color:"var(--teal)", bg:"#E2F1EC", stat:"53%", statLabel:"read it correctly",
+   t:"California killed the ‘sell by’ date — and the confusion it caused",
+   d:"From Jul 1, 2026 California requires ‘BEST if used by’ for quality and ‘USE by’ for safety, and bans consumer-facing ‘sell by’ entirely. It is the first statewide mandate. The reason it exists: 88% of Americans throw food out at or near the label date, only 53% can correctly say what the labels mean, and roughly a tenth of all US food waste traces back to that confusion."},
+  {glyph:"🥬", kind:"THE NUMBER", live:false, color:"var(--orange)", bg:"#FBEDDF", stat:"45.4%", statLabel:"of surplus is produce",
+   t:"Fresh produce is 45.4% of everything America throws away",
+   d:"ReFED’s 2026 report logged the first national drop in surplus food since the pandemic — 70 million tons, down 2.2%, led by households. But the composition is the useful part for a wrap brand: fresh produce is the single most wasted category, and the reasons are boring and fixable. This is the clearest ‘what is this product actually FOR’ number the engine has surfaced."},
 ];
 const WELCOME_MOVES = [
-  {t:"Be the brand that explains the loophole precisely", d:"A company can currently decide in-house that a substance touching your food is safe and tell nobody. The FDA just proposed changing that, and it covers food-contact materials — your exact category. Explain it accurately, including that it is a proposal requiring notification rather than approval. Everyone else will either miss it or overstate it, and precision is the one flex that costs nothing."},
-  {t:"Teach the date label — it is read-the-label energy pointed somewhere new", d:"‘BEST if used by’ is about quality. ‘USE by’ is about safety. Only about half of people know the difference and it drives roughly a tenth of all food waste. This brand already tells people to read labels; this is the same instinct aimed at a label that costs them money every week. Genuinely useful, entirely non-preachy, and it makes a wrap the practical answer rather than the pitch."},
-  {t:"Point the product at produce specifically", d:"Fresh produce is 45.4% of US surplus food — the biggest single category. Stop talking about ‘leftovers’ generally and start showing the half-cucumber, the herbs, the berries. Name the thing, show it lasting, and the product stops being an eco choice and becomes a household one."},
+  {glyph:"🧾", tag:"HIGH AUTHORITY", t:"Be the brand that explains the loophole precisely",
+   d:"A company can currently decide in-house that a substance touching your food is safe and tell nobody. The FDA just proposed changing that, and it covers food-contact materials — your exact category. Explain it accurately, including that it is a proposal requiring notification rather than approval. Everyone else will either miss it or overstate it, and precision is the one flex that costs nothing."},
+  {glyph:"🏷️", tag:"MOST SAVEABLE", t:"Teach the date label — it is read-the-label energy pointed somewhere new",
+   d:"‘BEST if used by’ is about quality. ‘USE by’ is about safety. Only about half of people know the difference and it drives roughly a tenth of all food waste. This brand already tells people to read labels; this is the same instinct aimed at a label that costs them money every week. Genuinely useful, entirely non-preachy, and it makes a wrap the practical answer rather than the pitch."},
+  {glyph:"🥬", tag:"BIGGEST REACH", t:"Point the product at produce specifically",
+   d:"Fresh produce is 45.4% of US surplus food — the biggest single category. Stop talking about ‘leftovers’ generally and start showing the half-cucumber, the herbs, the berries. Name the thing, show it lasting, and the product stops being an eco choice and becomes a household one."},
 ];
 const GREEN_SHOOTS = [
   {t:"The lunchbox as an owned occasion", size:"medium", horizon:"test-now", territory:"new occasion", move:"Back-to-school is the one moment where the product is used daily, in public, by someone with a camera. Claim it as a recurring seasonal beat rather than a one-week ride — a named lunchbox lane the brand returns to every August and every January restock."},
@@ -637,15 +685,35 @@ function MondayMemo({onClose,onGo}){
         <div className="modal-body">
           <div className="m-sec">
             <div className="m-sec-label">📖 The Read</div>
-            <div style={{background:'var(--paper)',border:'1px solid var(--border)',borderLeft:'4px solid var(--brand)',borderRadius:12,padding:'16px 18px',fontFamily:'Fraunces',fontSize:16,lineHeight:1.55,fontStyle:'italic'}}>
+            <div className="sig" style={{display:'block',borderLeft:'4px solid var(--brand)',padding:'16px 18px',fontFamily:'Fraunces',fontSize:16,lineHeight:1.55,fontStyle:'italic',animationDelay:'0ms'}}>
               <p style={{margin:'0 0 12px'}}>"This week is about labels — and about who gets to write them. Two of the three signals below are regulators quietly doing paperwork, and both land squarely in your category: what is allowed to touch food, and what the date on the front actually means."</p><p style={{margin:0}}>"The third is the number that finally says what this product is FOR. And in the feed, ‘is this still good?’ is the most-asked kitchen question nobody owns — while dirt cake, a dessert made of fake soil and gummy worms, is somehow back. Here’s what’s moving."</p>
             </div>
           </div>
           <div className="m-sec"><div className="m-sec-label">📡 3 Signals This Week</div>
-            {WELCOME_HIGHLIGHTS.map((s,i)=>(<div key={i} style={{display:'flex',gap:12,padding:'11px 0',borderBottom:i<WELCOME_HIGHLIGHTS.length-1?'1px dashed var(--border)':'none'}}><div style={{fontFamily:'Quicksand',fontWeight:900,color:'var(--brand)',fontSize:17,minWidth:18}}>{i+1}</div><div><div style={{fontWeight:800,fontSize:13.5,marginBottom:2}}>{s.t}</div><div style={{fontSize:12.5,color:'var(--ink-soft)',lineHeight:1.45}}>{s.d}</div></div></div>))}
+            {WELCOME_HIGHLIGHTS.map((s,i)=>(
+              <div className="sig" key={i} style={{"--sig":s.color||"var(--brand)","--sigbg":s.bg||"var(--brand-light)",animationDelay:(i*110)+"ms"}}>
+                <div className="sig-badge">{s.glyph||"📌"}</div>
+                <div style={{flex:1,minWidth:0}}>
+                  <div className="sig-top">
+                    {s.kind&&<span className="sig-kind">{s.kind}</span>}
+                    {s.live&&<span className="sig-live"><i>●</i> LIVE NOW</span>}
+                    {s.stat&&<span className="sig-stat"><b>{s.stat}</b><span>{s.statLabel}</span></span>}
+                  </div>
+                  <div className="sig-h">{s.t}</div>
+                  <div className="sig-d">{s.d}</div>
+                </div>
+              </div>))}
           </div>
           <div className="m-sec"><div className="m-sec-label">🎯 Shoot These This Week</div>
-            {WELCOME_MOVES.map((m,i)=>(<div key={i} style={{background:'var(--paper)',border:'1px solid var(--border)',borderRadius:12,padding:'12px 14px',marginBottom:8}}><div style={{fontWeight:800,fontSize:13.5,marginBottom:3}}>→ {m.t}</div><div style={{fontSize:12.5,color:'var(--ink-soft)',lineHeight:1.45}}>{m.d}</div></div>))}
+            {WELCOME_MOVES.map((m,i)=>(
+              <div className="mv" key={i} style={{animationDelay:(380+i*110)+"ms"}}>
+                <div className="mv-n">{m.glyph||(i+1)}</div>
+                <div style={{flex:1,minWidth:0}}>
+                  <div className="mv-h">{m.t}{m.tag&&<span className="mv-tag">{m.tag}</span>}</div>
+                  <div className="mv-d">{m.d}</div>
+                </div>
+                <span className="mv-arrow">→</span>
+              </div>))}
           </div>
           <Btn style={{width:'100%',padding:14,fontSize:15}} onClick={onGo}>SEE THIS WEEK'S ENGINE →</Btn>
         </div>
